@@ -1,0 +1,53 @@
+snippet forof
+options head
+abbr for (var e of obj) { ... }
+  for (${1:const} ${2:e} of ${3:#:object})
+  {
+    ${0}
+  }
+
+snippet forEach
+abbr    forEach((e, i, iterable) => ...)
+options word
+  forEach((${1:e}, ${2:i}, ${3:iterable}) => ${4:console.log(i + ': ' + e)}${5:#:, thisArg})${0}
+snippet forEach2
+abbr    forEach((e, i, iterable) => {...})
+options word
+  forEach((${1:e}, ${2:i}, ${3:iterable}) =>
+  {
+    ${4}
+  }${5:#:, thisArg});${0}
+
+snippet map
+abbr    map((e, i, iterable) => ...)
+options word
+  map((${1:e}, ${2:i}, ${3:iterable}) => ${4:e}${5:#:, thisArg})${0}
+snippet map2
+abbr    map((e, i, iterable) => {...})
+options word
+  map((${1:e}, ${2:i}, ${3:iterable}) =>
+  {
+    ${4}
+  }${5:#:, thisArg})${0}
+
+snippet filter
+abbr    filter((e, i, iterable) => ...)
+options word
+  filter((${1:e}, ${2:i}, ${3:iterable}) => ${4}${5:#:, thisArg})${0}
+snippet filter2
+abbr    filter((e, i, iterable) => {...})
+options word
+  filter((${1:e}, ${2:i}, ${3:iterable}) =>
+  {
+    ${4}
+  }${5:#:, thisArg})${0}
+
+
+snippet rgb
+options word
+abbr 'RGB(0-255, 0-255, 0-255)'
+  'RGB(${1:0}, ${2:0}, ${3:0})'
+snippet rgba
+options word
+abbr 'RGBA(0-255, 0-255, 0-255, 0.0-1.0)'
+  'RGBA(${1:0}, ${2:0}, ${3:0}, ${4:0})'

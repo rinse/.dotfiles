@@ -1,0 +1,8 @@
+snippet include_guard
+options head
+alias ig
+abbr #ifndef GUARD #define GUARD #endif 
+        #ifndef ${1:#:LIBRARY_NAME}`substitute(toupper(expand("%")), '\.', "_", "g")`
+        #define $1`substitute(toupper(expand("%")), '\.', "_", "g")`
+        ${0}
+        #endif  // $1`substitute(toupper(expand("%")), '\.', "_", "g")`
