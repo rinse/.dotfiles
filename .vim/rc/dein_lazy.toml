@@ -69,3 +69,8 @@ on_ft = 'html'
 repo = 'itchyny/lightline.vim'
 on_event = 'VimEnter'
 hook_add = 'let g:enabled_lightline = 1'
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+on_event = 'VimEnter'
+
