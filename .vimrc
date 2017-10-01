@@ -85,6 +85,8 @@ vnoremap <C-l>  "zd"zp`[<C-v>`]
 set runtimepath^=~/.vim
 set runtimepath+=~/.vim/after
 
+set tags+=.git/tags
+
 " load common syntax file to all filetypes
 au VimEnter,BufEnter * call s:LoadGeneralSyntax()
 au VimEnter,BufEnter * call s:LoadGeneralAfterSyntax()

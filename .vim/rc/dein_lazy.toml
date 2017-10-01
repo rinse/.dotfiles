@@ -74,3 +74,11 @@ hook_add = 'let g:enabled_lightline = 1'
 repo = 'tpope/vim-surround'
 on_event = 'VimEnter'
 
+[[plugins]]
+repo = 'soramugi/auto-ctags.vim'
+on_event = 'VimEnter'
+hook_add = '''
+  let g:auto_ctags_directory_list = ['.git']
+  let g:auto_ctags_tags_args = '--tag-relative --recurse --sort=yes --extra=+f'
+'''
+
