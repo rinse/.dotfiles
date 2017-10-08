@@ -9,11 +9,11 @@ hook_add = '''
 
 
 # completion
-[[plugins]]
-repo = 'Shougo/neocomplete.vim'
-if = 'has("lua")'
-on_event = 'InsertEnter'
-hook_add = 'let g:enabled_neocomplete = 1'
+# [[plugins]]
+# repo = 'Shougo/neocomplete.vim'
+# if = 'has("lua")'
+# on_event = 'InsertEnter'
+# hook_add = 'let g:enabled_neocomplete = 1'
 
 # snippets
 [[plugins]]
