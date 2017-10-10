@@ -19,6 +19,8 @@ set ambiwidth=double
 set splitbelow
 set splitright
 set laststatus=2
+set clipboard&
+set clipboard^=unnamedplus
 
 if v:version >= 800
   set breakindent
