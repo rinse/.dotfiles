@@ -89,3 +89,8 @@ on_cmd = 'Wandbox'
 [[plugins]]
 repo = 'roman/golden-ratio'
 on_event = 'VimEnter'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+on_event = 'VimEnter'
+if = 'executable("fzf")'
