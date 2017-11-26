@@ -82,3 +82,7 @@ hook_add = '''
   let g:auto_ctags_tags_args = '--tag-relative --recurse --sort=yes --extra=+f'
 '''
 
+[[plugins]]
+repo = 'rhysd/wandbox-vim'
+on_cmd = 'Wandbox'
+
