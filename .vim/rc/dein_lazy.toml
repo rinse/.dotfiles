@@ -85,6 +85,7 @@ hook_add = '''
 [[plugins]]
 repo = 'rhysd/wandbox-vim'
 on_cmd = 'Wandbox'
+hook_add = 'let g:enabled_wandbox_vim = 1'
 
 [[plugins]]
 repo = 'roman/golden-ratio'
