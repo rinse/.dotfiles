@@ -19,6 +19,6 @@ install: $(FILES) $(DIRS)
 	ln -s -v $(addprefix $(CURDIR)/, $^) $(HOME)
 
 .PHONY: clean
-clean: $(addprefix $(HOME)/, $(FILES) $(DIRS))
-	rm -v $(addprefix $(HOME)/, $(FILES))
-	rm -rv $(addprefix $(HOME)/, $(DIRS))
+clean:
+	$(RM) -v $(addprefix $(HOME)/, $(FILES))
+	$(RM) -rv $(addprefix $(HOME)/, $(DIRS))
