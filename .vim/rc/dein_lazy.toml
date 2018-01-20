@@ -86,3 +86,6 @@ hook_add = '''
 repo = 'rhysd/wandbox-vim'
 on_cmd = 'Wandbox'
 
+[[plugins]]
+repo = 'roman/golden-ratio'
+on_event = 'VimEnter'
