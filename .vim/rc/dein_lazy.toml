@@ -93,5 +93,5 @@ on_event = 'VimEnter'
 
 [[plugins]]
 repo = 'junegunn/fzf.vim'
-on_event = 'VimEnter'
+on_cmd = 'FZF'
 if = 'executable("fzf")'
