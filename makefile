@@ -4,8 +4,8 @@
 # $<: the first file that the target depends on
 # $?: files newer than the target that the target depends on
 
-FILES:=.vimrc .gvimrc .gitignore .gitconfig
-DIRS:=.vim
+FILES:=.vimrc .gvimrc .gitconfig
+DIRS:=.vim config
 
 .SILENT:
 
