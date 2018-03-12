@@ -7,6 +7,6 @@ augroup end
 
 function! s:load_proj() abort
   if filereadable ('proj.vim')
-    so proj.vim
+    so .proj.vim
   endif
 endfunction
