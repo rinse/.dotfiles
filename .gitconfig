@@ -8,6 +8,8 @@
 	hash = log --format='%h'
 	graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
 	current-branch = rev-parse --abbrev-ref HEAD
+	local-branches = "!f() { git show-ref --heads --abbrev | awk '{print $2}' | awk -F '[/]' '{print $3}'; }; f"
+	all-refs = for-each-ref --format="%(refname)"
 	sdiff = diff --ignore-space-change
 
 [push]
