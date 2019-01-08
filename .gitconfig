@@ -23,3 +23,7 @@
 
 [diff]
 	compactionHeuristic = true
+
+[rebase]
+	autostash = true
+	autosquash = true
