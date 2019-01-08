@@ -14,6 +14,7 @@
 	sdiff = diff --ignore-space-change
 	amend = commit --amend
 	idff = diff
+	fcommit = commit --fixup=HEAD
 
 [push]
 	default = simple
