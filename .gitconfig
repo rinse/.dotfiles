@@ -15,5 +15,11 @@
 [push]
 	default = simple
 
+[pull]
+	ff = only
+
+[merge]
+	ff = false
+
 [diff]
 	compactionHeuristic = true
