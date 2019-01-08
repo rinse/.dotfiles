@@ -15,6 +15,7 @@
 	amend = commit --amend
 	idff = diff
 	fcommit = commit --fixup=HEAD
+	fixup = "!f() { GIT_SEQUENCE_EDITOR=: git rebase -i --autosquash $@; }; f"
 
 [push]
 	default = simple
