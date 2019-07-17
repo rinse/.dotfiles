@@ -11,7 +11,6 @@
 	current-branch = rev-parse --abbrev-ref HEAD
 	local-branches = "!f() { git show-ref --heads --abbrev | awk '{print $2}' | awk -F '[/]' '{print $3}'; }; f"
 	all-refs = for-each-ref --format="%(refname)"
-	sdiff = diff --ignore-space-change
 	amend = commit --amend
 	idff = diff
 	fcommit = commit --fixup=HEAD
