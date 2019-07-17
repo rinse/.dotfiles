@@ -16,6 +16,9 @@
 	idff = diff
 	fcommit = commit --fixup=HEAD
 	fixup = "!f() { GIT_SEQUENCE_EDITOR=: git rebase -i -q --autosquash $@; }; f"
+	pull-request = "!f() { git fetch origin pull/$1/head:pull_request_$1; }; f"
+	show-toplevel = "rev-parse --show-toplevel"
+	show-git-dir = "rev-parse --absolute-git-dir"
 
 [push]
 	default = simple
