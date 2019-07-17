@@ -12,12 +12,17 @@
 	local-branches = "!f() { git show-ref --heads --abbrev | awk '{print $2}' | awk -F '[/]' '{print $3}'; }; f"
 	all-refs = for-each-ref --format="%(refname)"
 	amend = commit --amend
-	idff = diff
 	fcommit = commit --fixup=HEAD
 	fixup = "!f() { GIT_SEQUENCE_EDITOR=: git rebase -i -q --autosquash $@; }; f"
 	pull-request = "!f() { git fetch origin pull/$1/head:pull_request_$1; }; f"
 	show-toplevel = "rev-parse --show-toplevel"
 	show-git-dir = "rev-parse --absolute-git-dir"
+	s = status
+	cp = cherry-pick
+	rcont = rebase --continue
+	cpcont = cherry-pick --continue
+	pr = pull-request
+	idff = diff
 
 [push]
 	default = simple
