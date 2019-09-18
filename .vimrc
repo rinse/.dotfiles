@@ -33,11 +33,11 @@ endif
 " tab, space
 set expandtab " <Tab> produces spaces
 " how many columns text is indented with the reindent operations; << and >>
-set shiftwidth=2
+set shiftwidth=4
 " how many columns a tab counts for
-set tabstop=2
+set tabstop=4
 " how many columns vim uses when you hit Tab in insert mode
-set softtabstop=2
+set softtabstop=4
 " round indent to multiple of 'shiftwidth'
 set shiftround
 set list
