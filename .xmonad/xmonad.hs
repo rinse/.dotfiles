@@ -1,19 +1,28 @@
 import XMonad
 import XMonad.Hooks.DynamicLog (xmobar)
-import XMonad.Util.EZConfig
+import XMonad.Hooks.EwmhDesktops (ewmh)
+import XMonad.Hooks.ManageDocks (avoidStruts)
+import XMonad.Layout.NoBorders (noBorders)
+import XMonad.Util.EZConfig (additionalKeysP)
 
+
+myLayout = avoidStruts $ tiled ||| Mirror tiled ||| noBorders Full
+    where
+    tiled = Tall 1 (3 / 100) (5 / 8)
 
 myKeys :: [(String, X ())]
 myKeys =
     [ ("M4-l", spawn "lxlock")
+    , ("M1-C-t", spawn "lxterminal")
     ]
-
 
 main :: IO ()
 main = do
     let config = def
-            { modMask = mod1Mask :: KeyMask
+            { borderWidth = 3 :: Dimension
+            , focusFollowsMouse = False
+            , layoutHook = myLayout
+            , modMask = mod1Mask :: KeyMask
             , terminal = "lxterminal"
-            , borderWidth = 3 :: Dimension
             } `additionalKeysP` myKeys
-    xmobar config >>= xmonad
+    (xmobar . ewmh) config >>= xmonad
