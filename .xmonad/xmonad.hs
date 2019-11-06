@@ -10,6 +10,12 @@ import XMonad
 import XMonad.Hooks.DynamicLog (xmobar)
 import XMonad.Hooks.EwmhDesktops (ewmh)
 import XMonad.Hooks.ManageDocks (avoidStruts)
+import XMonad.Layout.BoringWindows (boringWindows, focusUp, focusDown)
+import XMonad.Layout.Minimize
+    ( minimize
+    , minimizeWindow
+    , MinimizeMsg (..)
+    )
 import XMonad.Layout.NoBorders (noBorders)
 import XMonad.Layout.ResizableTile
     ( ResizableTall (ResizableTall)
@@ -19,10 +25,11 @@ import XMonad.Util.EZConfig (additionalKeysP)
 
 
 -- |my layout.
-myLayout = avoidStruts $ tiled ||| Mirror tiled ||| noBorders Full
-    where
-    tiled = ResizableTall 1 (3 % 100) (1 / phi) [1, 6 % 5]
-    phi = 8 % 5
+myLayout = avoidStruts . boringWindows . minimize
+    $ tiled ||| Mirror tiled ||| noBorders Full
+        where
+        tiled = ResizableTall 1 (3 % 100) (1 / phi) [1, 6 % 5]
+        phi = 8 % 5
 
 -- |my key binds
 myKeys :: [(String, X ())]
@@ -31,6 +38,10 @@ myKeys =
     , ("M1-C-t", spawn "lxterminal")
     , ("M-a", sendMessage MirrorShrink)
     , ("M-z", sendMessage MirrorExpand)
+    , ("M-m", withFocused minimizeWindow)
+    , ("M-S-m", sendMessage RestoreNextMinimizedWin)
+    , ("M-j", focusDown)
+    , ("M-k", focusUp)
     ]
 
 main :: IO ()
