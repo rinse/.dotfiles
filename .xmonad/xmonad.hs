@@ -5,6 +5,7 @@
   $ xdg-mime default pcmanfm.desktop inode/directory
 -}
 
+import Data.Function ((&))
 import Data.Ratio ((%))
 import XMonad
 import XMonad.Hooks.DynamicLog (xmobar)
@@ -21,7 +22,7 @@ import XMonad.Layout.ResizableTile
     ( ResizableTall (ResizableTall)
     , MirrorResize (MirrorShrink, MirrorExpand)
     )
-import XMonad.Util.EZConfig (additionalKeysP)
+import XMonad.Util.EZConfig (additionalKeysP, removeKeysP)
 
 
 -- |my layout.
@@ -32,17 +33,24 @@ myLayout = avoidStruts . boringWindows . minimize
         phi = 8 % 5
 
 -- |my key binds
-myKeys :: [(String, X ())]
-myKeys =
-    [ ("M4-l", spawn "lxlock")
-    , ("M1-C-t", spawn "lxterminal")
-    , ("M-a", sendMessage MirrorShrink)
-    , ("M-z", sendMessage MirrorExpand)
-    , ("M-m", withFocused minimizeWindow)
-    , ("M-S-m", sendMessage RestoreNextMinimizedWin)
-    , ("M-j", focusDown)
-    , ("M-k", focusUp)
-    ]
+configKeys :: XConfig l -> XConfig l
+configKeys c = c `additionalKeysP` myAdditionalKeys `removeKeysP` myRemovedKeys
+    where
+    myAdditionalKeys :: [(String, X ())]
+    myAdditionalKeys =
+        [ ("M4-l", spawn "lxlock")
+        , ("M1-C-t", spawn "lxterminal")
+        , ("M-a", sendMessage MirrorShrink)
+        , ("M-z", sendMessage MirrorExpand)
+        , ("M-m", withFocused minimizeWindow)
+        , ("M-S-m", sendMessage RestoreNextMinimizedWin)
+        , ("M-j", focusDown)
+        , ("M-k", focusUp)
+        ]
+    myRemovedKeys :: [String]
+    myRemovedKeys =
+        [ "M-S-q"
+        ]
 
 main :: IO ()
 main = do
@@ -52,5 +60,5 @@ main = do
             , layoutHook = myLayout
             , modMask = mod1Mask :: KeyMask
             , terminal = "lxterminal"
-            } `additionalKeysP` myKeys
+            } & configKeys
     (xmobar . ewmh) config >>= xmonad
