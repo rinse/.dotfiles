@@ -10,7 +10,7 @@ import Data.Ratio ((%))
 import XMonad
 import XMonad.Hooks.DynamicLog (xmobar)
 import XMonad.Hooks.EwmhDesktops (ewmh)
-import XMonad.Hooks.ManageDocks (avoidStruts)
+import XMonad.Hooks.ManageDocks (docks, avoidStruts)
 import XMonad.Layout.BoringWindows (boringWindows, focusUp, focusDown)
 import XMonad.Layout.Minimize
     ( minimize
@@ -61,4 +61,4 @@ main = do
             , modMask = mod1Mask :: KeyMask
             , terminal = "lxterminal"
             } & configKeys
-    (xmobar . ewmh) config >>= xmonad
+    (xmobar . docks . ewmh) config >>= xmonad
