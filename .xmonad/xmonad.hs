@@ -5,7 +5,6 @@
   $ xdg-mime default pcmanfm.desktop inode/directory
 -}
 
-import Data.Function ((&))
 import Data.Ratio ((%))
 import XMonad
 import XMonad.Hooks.DynamicLog (xmobar)
@@ -15,7 +14,7 @@ import XMonad.Layout.BoringWindows (boringWindows, focusUp, focusDown)
 import XMonad.Layout.Minimize
     ( minimize
     , minimizeWindow
-    , MinimizeMsg (..)
+    , MinimizeMsg (RestoreNextMinimizedWin)
     )
 import XMonad.Layout.NoBorders (noBorders)
 import XMonad.Layout.ResizableTile
@@ -25,21 +24,22 @@ import XMonad.Layout.ResizableTile
 import XMonad.Util.EZConfig (additionalKeysP, removeKeysP)
 
 
--- |my layout.
 myLayout = avoidStruts . boringWindows . minimize
     $ tiled ||| Mirror tiled ||| noBorders Full
         where
         tiled = ResizableTall 1 (3 % 100) (1 / phi) [1, 6 % 5]
         phi = 8 % 5
 
--- |my key binds
+myTerminal :: String
+myTerminal = "lxterminal"
+
 configKeys :: XConfig l -> XConfig l
 configKeys c = c `additionalKeysP` myAdditionalKeys `removeKeysP` myRemovedKeys
     where
     myAdditionalKeys :: [(String, X ())]
     myAdditionalKeys =
         [ ("M4-l", spawn "lxlock")
-        , ("M1-C-t", spawn "lxterminal")
+        , ("M1-C-t", spawn myTerminal)
         , ("M-a", sendMessage MirrorShrink)
         , ("M-z", sendMessage MirrorExpand)
         , ("M-m", withFocused minimizeWindow)
@@ -52,13 +52,13 @@ configKeys c = c `additionalKeysP` myAdditionalKeys `removeKeysP` myRemovedKeys
         [ "M-S-q"
         ]
 
+myConfig = docks . ewmh . configKeys $ def
+    { borderWidth = 3 :: Dimension
+    , focusFollowsMouse = False
+    , layoutHook = myLayout
+    , modMask = mod1Mask :: KeyMask
+    , terminal = myTerminal
+    }
+
 main :: IO ()
-main = do
-    let config = def
-            { borderWidth = 3 :: Dimension
-            , focusFollowsMouse = False
-            , layoutHook = myLayout
-            , modMask = mod1Mask :: KeyMask
-            , terminal = "lxterminal"
-            } & configKeys
-    (xmobar . docks . ewmh) config >>= xmonad
+main = xmobar myConfig >>= xmonad
