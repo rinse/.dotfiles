@@ -3,6 +3,8 @@
   You may want to run the following after installing xmonad.
   $ apt-get install dmenu xmobar
   $ xdg-mime default pcmanfm.desktop inode/directory
+
+  xmonad version: 0.13
 -}
 
 import Data.Ratio ((%))
