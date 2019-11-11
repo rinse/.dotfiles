@@ -7,6 +7,10 @@
 
 import Data.Ratio ((%))
 import XMonad
+import XMonad.Actions.CycleWS
+    ( nextScreen
+    , shiftNextScreen
+    )
 import XMonad.Hooks.DynamicLog (xmobar)
 import XMonad.Hooks.EwmhDesktops (ewmh)
 import XMonad.Hooks.ManageDocks (docks, avoidStruts)
@@ -50,6 +54,8 @@ configKeys c = c `additionalKeysP` myAdditionalKeys `removeKeysP` myRemovedKeys
         , ("M-S-m", sendMessage RestoreNextMinimizedWin)
         , ("M-j", focusDown)
         , ("M-k", focusUp)
+        , ("M-r", nextScreen)
+        , ("M-S-r", shiftNextScreen >> nextScreen)
         ]
     myRemovedKeys :: [String]
     myRemovedKeys =
