@@ -29,6 +29,7 @@ import XMonad.Layout.ResizableTile
     , MirrorResize (MirrorShrink, MirrorExpand)
     )
 import XMonad.Util.EZConfig (additionalKeysP, removeKeysP)
+import qualified XMonad.StackSet as W
 
 
 myLayout = avoidStruts . boringWindows . minimize
@@ -58,10 +59,12 @@ configKeys c = c `additionalKeysP` myAdditionalKeys `removeKeysP` myRemovedKeys
         , ("M-k", focusUp)
         , ("M-r", nextScreen)
         , ("M-S-r", shiftNextScreen >> nextScreen)
+        , ("M-i", windows W.swapMaster)
         ]
     myRemovedKeys :: [String]
     myRemovedKeys =
         [ "M-S-q"
+        , "M1-<Return>" -- For intellij idea. Use M-i instead
         ]
 
 myConfig = docks . ewmh . configKeys $ def
