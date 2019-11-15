@@ -1,10 +1,10 @@
 {-|
-  This is xmonad.hs for me.
-  You may want to run the following after installing xmonad.
-  $ apt-get install dmenu xmobar
-  $ xdg-mime default pcmanfm.desktop inode/directory
-
-  xmonad version: 0.13
+  - This is xmonad.hs for me. xmonad version: 0.13
+  - You may want to run the following after installing xmonad.
+    - $ apt-get install dmenu xmobar
+    - $ xdg-mime default pcmanfm.desktop inode/directory
+  - Export the following environment variable.
+    - $ export _JAVA_AWT_WM_NONREPARENTING=1
 -}
 
 import Data.Ratio ((%))
@@ -16,7 +16,6 @@ import XMonad.Actions.CycleWS
 import XMonad.Hooks.DynamicLog (xmobar)
 import XMonad.Hooks.EwmhDesktops (ewmh)
 import XMonad.Hooks.ManageDocks (docks, avoidStruts)
-import XMonad.Hooks.SetWMName (setWMName)
 import XMonad.Layout.BoringWindows (boringWindows, focusUp, focusDown)
 import XMonad.Layout.Minimize
     ( minimize
@@ -37,9 +36,6 @@ myLayout = avoidStruts . boringWindows . minimize
         where
         tiled = ResizableTall 1 (3 % 100) (1 / phi) [1, 6 % 5]
         phi = 8 % 5
-
-myStartupHook :: X ()
-myStartupHook = setWMName "LG3D"
 
 myTerminal :: String
 myTerminal = "lxterminal"
@@ -72,7 +68,6 @@ myConfig = docks . ewmh . configKeys $ def
     , focusFollowsMouse = False
     , layoutHook = myLayout
     , modMask = mod1Mask :: KeyMask
-    , startupHook = myStartupHook
     , terminal = myTerminal
     }
 
