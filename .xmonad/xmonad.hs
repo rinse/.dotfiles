@@ -31,11 +31,11 @@ import XMonad.Util.EZConfig (additionalKeysP, removeKeysP)
 import qualified XMonad.StackSet as W
 
 
-myLayout = avoidStruts . boringWindows . minimize
-    $ tiled ||| Mirror tiled ||| noBorders Full
-        where
-        tiled = ResizableTall 1 (3 % 100) (1 / phi) [1, 6 % 5]
-        phi = 8 % 5
+myLayout = avoidStruts . boringWindows . minimize $ tiles
+    where
+    tiles = tile ||| Mirror tile ||| noBorders Full
+    tile = ResizableTall 1 (3 % 100) (1 / phi) [1, 6 % 5]
+    phi = 8 % 5
 
 myTerminal :: String
 myTerminal = "lxterminal"

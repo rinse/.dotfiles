@@ -1,0 +1,55 @@
+Config
+  { font = "-*-Fixed-*-*-*-*-*-*-*-*-*-*-*-*"
+  , additionalFonts = [ "xft:Takao ゴシック:size=10:antialias=false:weight=400" ]
+  , borderColor = "black"
+  , border = TopB
+  , bgColor = "black"
+  , fgColor = "grey"
+  , position = TopW L 100
+, commands =
+    [ Run Network "eth0"
+        [ "--Low", "10240", "--High","524288"
+        , "--normal", "green", "--high","red"
+        , "--template", "<dev>: <fn=1>↓</fn><rx>kB|<fn=1>↑</fn><tx>kB"
+        , "-w", "5"
+        ] 10
+    , Run Memory [ "-t","Mem: <usedratio>%" ] 10
+    , Run Swap [] 10
+    , Run Com "uname" [ "-s", "-r" ] "" 36000
+    , Run Date "%Y/%m/%d(%a) %H:%M:%S" "date" 10
+    , Run StdinReader
+    , Run DiskIO
+        [ ("/", "root: <total>")
+        ]
+        [ "--width","5"
+        ] 10
+    , Run DiskU
+        [ ("/", "root: <used>/<size>")
+        ]
+        [ "--Low", "30", "--High", "90"
+        , "--normal", "green", "--high", "red"
+        , "-m", "1", "-p", "3"
+        ]
+        10
+    , Run MultiCpu
+        [ "--template", "Cpu(%): <autototal>"
+        , "--Low", "5", "--High", "50"
+        , "--normal", "green", "--high", "red"
+        , "-p","2"
+        ] 10
+    , Run MultiCoreTemp
+        [ "--template", "Temp: <max>°C"
+        , "--Low", "30", "--High", "80"
+        , "--normal", "green", "--high", "red"
+        ] 50
+    , Run Kbd
+        [ ("us(dvorak)" , "DV")
+        , ("us"         , "US")
+        , ("jp"         , "JP")
+        , ("ja"         , "JA")
+        ]
+    ]
+  , sepChar = "%"
+  , alignSep = "}{"
+  , template = "%StdinReader% | %multicpu% | %multicoretemp% | %memory% | %diskio% | %disku% }{ %eth0% | %kbd% | <fc=#ee9a00>%date%</fc>"
+  }
