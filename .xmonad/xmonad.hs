@@ -28,6 +28,7 @@ import XMonad.Layout.ResizableTile
     , MirrorResize (MirrorShrink, MirrorExpand)
     )
 import XMonad.Util.EZConfig (additionalKeysP, removeKeysP)
+import XMonad.Util.Run (safeSpawn)
 import qualified XMonad.StackSet as W
 
 
@@ -56,6 +57,9 @@ configKeys c = c `additionalKeysP` myAdditionalKeys `removeKeysP` myRemovedKeys
         , ("M-r", nextScreen)
         , ("M-S-r", shiftNextScreen >> nextScreen)
         , ("M-i", windows W.swapMaster)
+        , ("M-u a", safeSpawn "pactl" [ "set-sink-volume", "@DEFAULT_SINK@", "+10%" ])
+        , ("M-u x", safeSpawn "pactl" [ "set-sink-volume", "@DEFAULT_SINK@", "-10%" ])
+        , ("M-u m", safeSpawn "pactl" [ "set-sink-mute", "@DEFAULT_SINK@", "toggle" ])
         ]
     myRemovedKeys :: [String]
     myRemovedKeys =
