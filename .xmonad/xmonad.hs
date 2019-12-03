@@ -28,7 +28,7 @@ import XMonad.Layout.ResizableTile
     , MirrorResize (MirrorShrink, MirrorExpand)
     )
 import XMonad.Util.EZConfig (additionalKeysP, removeKeysP)
-import XMonad.Util.Run (safeSpawn)
+import XMonad.Util.Run (safeSpawn, safeSpawnProg)
 import qualified XMonad.StackSet as W
 
 
@@ -46,8 +46,8 @@ configKeys c = c `additionalKeysP` myAdditionalKeys `removeKeysP` myRemovedKeys
     where
     myAdditionalKeys :: [(String, X ())]
     myAdditionalKeys =
-        [ ("M4-l", spawn "lxlock")
-        , ("M1-C-t", spawn myTerminal)
+        [ ("M4-l", safeSpawnProg "lxlock")
+        , ("M1-C-t", safeSpawnProg myTerminal)
         , ("M-a", sendMessage MirrorShrink)
         , ("M-z", sendMessage MirrorExpand)
         , ("M-m", withFocused minimizeWindow)
