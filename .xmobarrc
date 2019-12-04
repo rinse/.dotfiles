@@ -1,6 +1,6 @@
 Config
   { font = "-*-Fixed-*-*-*-*-*-*-*-*-*-*-*-*"
-  , additionalFonts = [ "xft:Takao ゴシック:size=10:antialias=false:weight=400" ]
+  , additionalFonts = []
   , borderColor = "black"
   , border = TopB
   , bgColor = "black"
