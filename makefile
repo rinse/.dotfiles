@@ -28,5 +28,4 @@ install: $(addprefix $(HOME)/, $(FILES) $(DIRS))
 
 .PHONY: clean
 clean:
-	$(RM) -v $(addprefix $(HOME)/, $(FILES))
-	$(RM) -rv $(addprefix $(HOME)/, $(DIRS))
+	$(RM) -v $(addprefix $(HOME)/, $(FILES) $(DIRS))
