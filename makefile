@@ -5,7 +5,7 @@
 # $?: files newer than the target that the target depends on
 
 FILES:=.vimrc .gvimrc .gitconfig .config/git/ignore
-DIRS:=.vim
+DIRS:=.vim .xmonad
 
 .SILENT:
 
