@@ -57,17 +57,12 @@ set backspace=indent,eol,start
 " keymaps
 let mapleader = "m"
 nnoremap <Leader>m m
-nnoremap <Leader>w <C-w>
 noremap <Leader>y "+y
 noremap <Leader>Y "+Y
 noremap <Leader>d "+d
 noremap <Leader>D "+D
 noremap <Leader>p "+p
 noremap <Leader>P "+P
-
-" <Space> is a prefix for commands
-noremap <Space> <nop>
-nnoremap <Space><Space> :!!<CR>
 
 " other keymaps
 nnoremap Y y$
@@ -107,4 +102,3 @@ function! s:LoadGeneralAfterSyntax() abort
     ru! after/syntax/_.vim
   endif
 endfunction
-
