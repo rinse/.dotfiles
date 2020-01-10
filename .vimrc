@@ -83,6 +83,11 @@ vnoremap <C-j>  "zdj"zP`[<C-v>`]
 vnoremap <C-k>  "zdk"zP`[<C-v>`]
 vnoremap <C-l>  "zd"zp`[<C-v>`] 
 
+" enable ftplugins
+filetype plugin on
+" disable ftplugins keymappings
+let no_plugin_maps = 1
+
 set runtimepath^=~/.vim
 set runtimepath+=~/.vim/after
 
