@@ -1,2 +1,2 @@
-syn match emptyLine /^\s\+$/
-hi link emptyLine Error
+syn match trailingSpaces /\s\+$/
+hi link trailingSpaces Error
