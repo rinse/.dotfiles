@@ -23,6 +23,7 @@
 	cpcont = cherry-pick --continue
 	pr = pull-request
 	idff = diff
+	initial-commit = commit -m 'initial commit' --allow-empty
 
 [push]
 	default = simple
