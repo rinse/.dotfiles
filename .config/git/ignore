@@ -1,2 +1,19 @@
-*.swp
+# git worktree
 .worktree/*
+
+# vim
+*.swp
+
+# idea
+.idea
+*.iml
+
+# IDE
+out
+target
+
+# node
+node_modules
+
+# git
+.git-credentials

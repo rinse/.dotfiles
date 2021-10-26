@@ -25,6 +25,9 @@
 	idff = diff
 	initial-commit = commit -m 'initial commit' --allow-empty
 
+[init]
+	defaultBranch = main
+
 [push]
 	default = simple
 
@@ -36,6 +39,7 @@
 
 [diff]
 	compactionHeuristic = true
+	algorithm = patience
 
 [rebase]
 	autostash = true
