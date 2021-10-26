@@ -3,11 +3,17 @@
 repo = 'Shougo/dein.vim'
 
 # colorschemes
+# [[plugins]]
+# repo = 'AlessandroYorba/Alduin'
+# if = 'has("gui_running")'
+# hook_add = '''
+#   au DeinAutoCmd VimEnter * nested colorscheme alduin
+# '''
+
 [[plugins]]
-repo = 'AlessandroYorba/Alduin'
-if = 'has("gui_running")'
+repo = 'morhetz/gruvbox'
 hook_add = '''
-  au DeinAutoCmd VimEnter * nested colorscheme alduin
+  au DeinAutoCmd VimEnter * nested colorscheme gruvbox
 '''
 
 # util

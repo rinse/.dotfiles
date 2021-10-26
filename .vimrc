@@ -97,6 +97,9 @@ set tags+=.git/tags
 au VimEnter,BufEnter * call s:LoadGeneralSyntax()
 au VimEnter,BufEnter * call s:LoadGeneralAfterSyntax()
 
+" use a dark colourscheme
+set background=dark
+
 function! s:LoadGeneralSyntax() abort
   if exists('g:syntax_on')
     ru! syntax/_.vim

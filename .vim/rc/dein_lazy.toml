@@ -32,6 +32,13 @@ on_ft = 'kotlin'
 repo = 'raichoo/purescript-vim'
 on_ft = 'purescript'
 
+[[plugins]]
+repo = 'elzr/vim-json'
+on_ft = 'json'
+hook_add = '''
+  let g:vim_json_syntax_conceal = 0
+'''
+
 # git
 [[plugins]]
 repo = 'tpope/vim-fugitive'
