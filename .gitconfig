@@ -4,35 +4,11 @@
 [color]
 	ui = auto
 
-[alias]
-	hash = log --format='%h'
-	graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
-	graph-all = "!f() { git graph $(git local-branches); }; f"
-	current-branch = rev-parse --abbrev-ref HEAD
-	local-branches = "!f() { git show-ref --heads --abbrev | awk '{print $2}' | awk -F '[/]' '{print $3}'; }; f"
-	all-refs = for-each-ref --format="%(refname)"
-	amend = commit --amend
-	fcommit = commit --fixup=HEAD
-	fixup = "!f() { GIT_SEQUENCE_EDITOR=: git rebase -i -q --autosquash $@; }; f"
-	show-toplevel = "rev-parse --show-toplevel"
-	show-git-dir = "rev-parse --absolute-git-dir"
-	s = status
-	rcont = rebase --continue
-	cpcont = cherry-pick --continue
-	idff = diff
-	initial-commit = commit -m 'initial commit' --allow-empty
-
 [init]
 	defaultBranch = main
 
-[push]
-	default = simple
-
-[pull]
-	ff = only
-
-[merge]
-	ff = false
+[branch]
+	autosetupmerge = false
 
 [diff]
 	compactionHeuristic = true
@@ -42,5 +18,29 @@
 	autostash = true
 	autosquash = true
 
-[branch]
-	autosetupmerge = false
+[merge]
+	ff = false
+
+[pull]
+	ff = only
+
+[push]
+	default = simple
+
+[alias]
+	hash = log --format='%h'
+	graph = log --graph --topo-order --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
+	graph-all = "!f() { git graph $(git local-branches); }; f"
+	current-branch = rev-parse --abbrev-ref HEAD
+	local-branches = "!f() { git show-ref --heads --abbrev | awk '{print $2}' | awk -F '[/]' '{print $3}'; }; f"
+	all-refs = for-each-ref --format="%(refname)"
+	amend = commit --amend --no-edit
+	fcommit = commit --fixup=HEAD
+	fixup = "!f() { GIT_SEQUENCE_EDITOR=: git rebase -i -q --autosquash $@; }; f"
+	show-toplevel = "rev-parse --show-toplevel"
+	show-git-dir = "rev-parse --absolute-git-dir"
+	s = status
+	rcont = rebase --continue
+	cpcont = cherry-pick --continue
+	idff = diff
+	initial-commit = commit -m 'initial commit' --allow-empty
