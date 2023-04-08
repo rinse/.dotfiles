@@ -21,10 +21,6 @@ repo = 'othree/jsdoc-syntax.vim'
 on_ft = 'javascript'
 
 [[plugins]]
-repo = 'Mizuchi/STL-Syntax'
-on_ft = 'cpp'
-
-[[plugins]]
 repo = 'udalov/kotlin-vim'
 on_ft = 'kotlin'
 
@@ -39,12 +35,6 @@ hook_add = '''
   let g:vim_json_syntax_conceal = 0
 '''
 
-# git
-[[plugins]]
-repo = 'tpope/vim-fugitive'
-if = 'executable("git")'
-on_event = 'VimEnter'
-
 # utils
 [[plugins]]
 repo = 'itchyny/lightline.vim'
@@ -56,18 +46,15 @@ repo = 'tpope/vim-surround'
 on_event = 'VimEnter'
 
 [[plugins]]
-repo = 'soramugi/auto-ctags.vim'
-on_event = 'VimEnter'
-hook_add = '''
-  let g:auto_ctags_directory_list = ['.git']
-  let g:auto_ctags_tags_args = '--tag-relative --recurse --sort=yes --extra=+f'
-'''
-
-[[plugins]]
 repo = 'roman/golden-ratio'
 on_event = 'VimEnter'
 
 [[plugins]]
-repo = 'junegunn/fzf.vim'
+repo = 'junegunn/fzf'
 on_cmd = 'FZF'
 if = 'executable("fzf")'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+on_cmd = 'FZF'
+depends_on = 'fzf'
