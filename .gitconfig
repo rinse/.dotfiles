@@ -37,17 +37,19 @@
 	hash = log --no-show-signature --format='%h'
 	graph = log --no-show-signature --graph --topo-order --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
 	graph-all = "!f() { git graph $(git local-branches); }; f"
-	current-branch = rev-parse --abbrev-ref HEAD
-	local-branches = "!f() { git show-ref --heads --abbrev | awk '{print $2}' | awk -F '[/]' '{print $3}'; }; f"
+	current-branch = branch --show-current
+	local-branches = branch --format '%(refname:lstrip=2)'
+	branches = local-branches
 	all-refs = for-each-ref --format="%(refname)"
 	amend = commit --amend --no-edit
 	fcommit = commit --fixup=HEAD
 	fixup = "!f() { GIT_SEQUENCE_EDITOR=: git rebase -i -q --autosquash $@; }; f"
-	show-toplevel = "rev-parse --show-toplevel"
-	show-git-dir = "rev-parse --absolute-git-dir"
+	show-toplevel = rev-parse --show-toplevel
+	show-git-dir = rev-parse --absolute-git-dir
 	s = status
 	rcont = rebase --continue
 	cpcont = cherry-pick --continue
 	idff = diff
+	lgo = log
 	initial-commit = commit -m 'initial commit' --allow-empty
 	changelog = log --no-show-signature --pretty=format:'* %Cgreen%h %Cblue%cn %Creset%s' --topo-order
