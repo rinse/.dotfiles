@@ -3,6 +3,7 @@ scriptencoding utf-8
 set encoding=utf8
 set fileencoding=utf-8
 set fileencodings=utf-8,sjis,utf-16le,utf-16,euc-jp
+set fileformats=unix,dos
 set number
 set cursorline
 set showmatch
