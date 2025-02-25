@@ -8,6 +8,9 @@
 .idea
 *.iml
 
+# vscode
+.vscode
+
 # IDE
 out
 target
