@@ -1,12 +1,3 @@
-# nerdtree
-[[plugins]]
-repo = 'scrooloose/nerdtree'
-on_cmd = 'NERDTree'
-hook_add = '''
-  let g:NERDTreeShowHidden = 1
-  nnoremap <silent> <leader>nt :NERDTree<CR>
-'''
-
 # syntaxes
 [[plugins]]
 repo = 'cespare/vim-toml'
