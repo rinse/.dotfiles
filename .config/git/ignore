@@ -1,5 +1,6 @@
 # git worktree
 .worktree/
+.wt
 
 # vim
 *.swp
@@ -20,3 +21,10 @@ node_modules
 
 # git
 .git-credentials
+
+# Claude
+**/.claude/settings.local.json
+.tmp
+
+# playwright-cli
+.playwright-cli/
