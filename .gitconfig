@@ -1,5 +1,6 @@
 [core]
 	editor = vim
+	quotepath = false
 
 [color]
 	ui = auto
@@ -17,6 +18,7 @@
 [rebase]
 	autostash = true
 	autosquash = true
+	rebaseMerges = true
 
 [merge]
 	ff = false
@@ -53,3 +55,25 @@
 	lgo = log
 	initial-commit = commit -m 'initial commit' --allow-empty
 	changelog = log --no-show-signature --pretty=format:'* %Cgreen%h %Cblue%cn %Creset%s' --topo-order
+	reset-dates = rebase --reset-author-date --committer-date-is-author-date
+	difit = "!f() { npx difit $@; }; f"
+	diffit = difit
+
+[url "git@github.com:"]
+    pushInsteadOf = git://github.com/
+    pushInsteadOf = https://github.com/
+    pushInsteadOf = https://git::@github.com/
+
+[url "git@rinse.github.com:rinse"]
+	insteadOf = git@github.com:rinse
+
+[url "git@eris575.github.com:eris575"]
+	insteadOf = git@github.com:eris575
+
+[url "git@thisbe418.github.com:thisbe418"]
+	insteadOf = git@github.com:thisbe418
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
