@@ -1,1 +1,1 @@
-au BufEnter *.purs set filetype=purescript
+au BufRead,BufNewFile *.purs setfiletype purescript

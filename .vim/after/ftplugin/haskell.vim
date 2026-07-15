@@ -1,7 +1,7 @@
 scriptencoding utf-8
 
 " stylish-haskell integration
-augroup autocmd_env
+augroup autocmd_haskell
   autocmd!
   autocmd BufWrite *.hs silent call s:StylishHaskell()
 augroup end

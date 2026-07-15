@@ -47,5 +47,5 @@ if = 'executable("fzf")'
 
 [[plugins]]
 repo = 'junegunn/fzf.vim'
-on_cmd = 'FZF'
-depends_on = 'fzf'
+on_cmd = ['Files', 'GFiles', 'Buffers', 'Rg', 'Lines', 'BLines', 'History', 'Commits', 'Helptags']
+depends = 'fzf'

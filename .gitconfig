@@ -1,3 +1,7 @@
+[user]
+	# Force per-repository identities; see the [url] sections below
+	useConfigOnly = true
+
 [core]
 	editor = vim
 	quotepath = false
@@ -12,7 +16,6 @@
 	autosetupmerge = false
 
 [diff]
-	compactionHeuristic = true
 	algorithm = patience
 
 [rebase]

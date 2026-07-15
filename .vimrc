@@ -82,7 +82,7 @@ cnoremap <C-n> <DOWN>
 vnoremap <C-h>  "zdh"zP`[<C-v>`]
 vnoremap <C-j>  "zdj"zP`[<C-v>`]
 vnoremap <C-k>  "zdk"zP`[<C-v>`]
-vnoremap <C-l>  "zd"zp`[<C-v>`] 
+vnoremap <C-l>  "zd"zp`[<C-v>`]
 
 " enable ftplugins
 filetype plugin on

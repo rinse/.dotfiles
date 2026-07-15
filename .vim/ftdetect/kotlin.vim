@@ -1,3 +1,1 @@
-au BufEnter *.kt set filetype=kotlin
-au BufEnter *.kts set filetype=kotlin
-
+au BufRead,BufNewFile *.kt,*.kts setfiletype kotlin
