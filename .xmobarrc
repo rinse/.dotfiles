@@ -1,5 +1,5 @@
 Config
-  { font = "-*-Fixed-*-*-*-*-*-*-*-*-*-*-*-*"
+  { font = "xft:Monospace-10"
   , additionalFonts = []
   , borderColor = "black"
   , border = TopB
@@ -36,11 +36,6 @@ Config
         , "--normal", "green", "--high", "red"
         , "-p","2"
         ] 10
-    , Run MultiCoreTemp
-        [ "--template", "Temp: <max>°C"
-        , "--Low", "30", "--High", "80"
-        , "--normal", "green", "--high", "red"
-        ] 50
     , Run Kbd
         [ ("us(dvorak)" , "DV")
         , ("us"         , "US")
@@ -50,5 +45,5 @@ Config
     ]
   , sepChar = "%"
   , alignSep = "}{"
-  , template = "%StdinReader% | %multicpu% | %multicoretemp% | %memory% | %diskio% | %disku% }{ %eth0% | %kbd% | <fc=#ee9a00>%date%</fc>"
+  , template = "%StdinReader% | %multicpu% | %memory% | %diskio% | %disku% }{ %eth0% | %kbd% | <fc=#ee9a00>%date%</fc>"
   }
