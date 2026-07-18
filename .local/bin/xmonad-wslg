@@ -17,9 +17,17 @@ if [ ! -S /tmp/.X11-unix/X0 ]; then
 	exit 1
 fi
 
+# Under WSLg /tmp/.X11-unix is a read-only tmpfs, so Xephyr cannot create a
+# filesystem socket there and only binds the Linux abstract socket
+# (@/tmp/.X11-unix/Xn); check both kinds when probing displays.
+display_socket_exists() {
+	[ -S "/tmp/.X11-unix/X$1" ] ||
+		ss -xl 2>/dev/null | grep -q "@/tmp/.X11-unix/X$1[[:space:]]"
+}
+
 # Pick the first free nested display number (:1, :2, ...).
 display_num=1
-while [ -S /tmp/.X11-unix/X$display_num ]; do
+while display_socket_exists "$display_num" || [ -e "/tmp/.X$display_num-lock" ]; do
 	display_num=$((display_num + 1))
 done
 nested_display=:$display_num
@@ -43,7 +51,11 @@ trap cleanup EXIT INT TERM
 # Wait for the nested display's socket to appear before starting xmonad.
 timeout=10
 waited=0
-while [ ! -S "/tmp/.X11-unix/X$display_num" ]; do
+until display_socket_exists "$display_num"; do
+	if ! kill -0 "$xephyr_pid" 2>/dev/null; then
+		echo "xmonad-wslg: Xephyr exited before $nested_display became ready" >&2
+		exit 1
+	fi
 	if [ "$waited" -ge "$timeout" ]; then
 		echo "xmonad-wslg: timed out waiting for Xephyr on $nested_display" >&2
 		exit 1
