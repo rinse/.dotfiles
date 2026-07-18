@@ -14,4 +14,5 @@ okf_version: "0.1"
 
 # リポジトリ運用
 
+* [worktree やブランチ名に "key" を含めると権限ルールに誤マッチする](worktree-naming-deny-rules.md) - Claude Code のシークレット保護 deny ルール Read(**/*key*) はパス全体に効くため、ブランチ名由来のパスが Edit 不能になる。名前から key を外して回避する。
 * [merge.ff=false 設定下では git merge --squash が失敗する](git-squash-merge-ff-config.md) - この dotfiles の .gitconfig は merge.ff=false を設定しており、--squash と衝突する。-c merge.ff=true で一時的に上書きして実行する。
