@@ -10,7 +10,7 @@ Config
     [ Run Network "eth0"
         [ "--Low", "10240", "--High","524288"
         , "--normal", "green", "--high","red"
-        , "--template", "<dev>: <fn=1>↓</fn><rx>kB|<fn=1>↑</fn><tx>kB"
+        , "--template", "<dev>: ↓<rx>kB|↑<tx>kB"
         , "-w", "5"
         ] 10
     , Run Memory [ "-t","Mem: <usedratio>%" ] 10
