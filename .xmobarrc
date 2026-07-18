@@ -1,5 +1,5 @@
 Config
-  { font = "xft:Monospace-13"
+  { font = "xft:UDEV Gothic LG-13"
   , additionalFonts = []
   , borderColor = "black"
   , border = TopB
