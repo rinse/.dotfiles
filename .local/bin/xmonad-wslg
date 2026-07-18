@@ -1,0 +1,65 @@
+#!/bin/sh
+# Start an XMonad session under WSLg.
+#
+# WSLg's Xwayland (display :0) is rootless, so a window manager cannot
+# manage it directly. Instead we start a nested Xephyr server, shown as a
+# single window on the Windows desktop, and run xmonad inside that.
+
+set -e
+
+if ! command -v Xephyr >/dev/null 2>&1; then
+	echo "xmonad-wslg: Xephyr not found on PATH; try: sudo apt install xserver-xephyr" >&2
+	exit 1
+fi
+
+if [ ! -S /tmp/.X11-unix/X0 ]; then
+	echo "xmonad-wslg: host X socket /tmp/.X11-unix/X0 not found; is WSLg running?" >&2
+	exit 1
+fi
+
+# Pick the first free nested display number (:1, :2, ...).
+display_num=1
+while [ -S /tmp/.X11-unix/X$display_num ]; do
+	display_num=$((display_num + 1))
+done
+nested_display=:$display_num
+
+geometry=${XMONAD_WSLG_GEOMETRY:-1920x1080}
+
+# Xephyr itself is an X client, so it needs DISPLAY pointed at the host
+# (WSLg) server; the display number it creates is given as its argument.
+DISPLAY=:0 Xephyr "$nested_display" \
+	-ac \
+	-resizeable \
+	-screen "$geometry" \
+	-title "xmonad (WSLg)" &
+xephyr_pid=$!
+
+cleanup() {
+	kill "$xephyr_pid" 2>/dev/null
+}
+trap cleanup EXIT INT TERM
+
+# Wait for the nested display's socket to appear before starting xmonad.
+timeout=10
+waited=0
+while [ ! -S "/tmp/.X11-unix/X$display_num" ]; do
+	if [ "$waited" -ge "$timeout" ]; then
+		echo "xmonad-wslg: timed out waiting for Xephyr on $nested_display" >&2
+		exit 1
+	fi
+	sleep 1
+	waited=$((waited + 1))
+done
+
+custom_bin="$HOME/.xmonad/xmonad-$(uname -m)-linux"
+if [ -x "$custom_bin" ]; then
+	xmonad_bin="$custom_bin"
+elif command -v xmonad >/dev/null 2>&1; then
+	xmonad_bin=xmonad
+else
+	echo "xmonad-wslg: no xmonad binary found ($custom_bin or xmonad on PATH)" >&2
+	exit 1
+fi
+
+DISPLAY="$nested_display" "$xmonad_bin"
