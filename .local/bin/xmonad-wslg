@@ -44,7 +44,10 @@ DISPLAY=:0 Xephyr "$nested_display" \
 xephyr_pid=$!
 
 cleanup() {
-	kill "$xephyr_pid" 2>/dev/null
+	if [ -n "${fcitx5_pid:-}" ]; then
+		kill "$fcitx5_pid" 2>/dev/null || :
+	fi
+	kill "$xephyr_pid" 2>/dev/null || :
 }
 trap cleanup EXIT INT TERM
 
@@ -64,6 +67,37 @@ until display_socket_exists "$display_num"; do
 	waited=$((waited + 1))
 done
 
+# Shared environment for every client on the nested display: force X11
+# backends (with WSLg's wayland socket present, GTK/Qt/SDL apps would
+# otherwise open on the host Wayland compositor instead of the nested
+# display; GDK even tries the default "wayland-0" socket when
+# WAYLAND_DISPLAY is unset) and route input through fcitx5 for Japanese
+# input. Used for both fcitx5 itself and xmonad so the list isn't
+# duplicated.
+session_env() {
+	env -u WAYLAND_DISPLAY \
+		DISPLAY="$nested_display" \
+		GDK_BACKEND=x11 \
+		QT_QPA_PLATFORM=xcb \
+		SDL_VIDEODRIVER=x11 \
+		XDG_SESSION_TYPE=x11 \
+		GTK_IM_MODULE=fcitx \
+		QT_IM_MODULE=fcitx \
+		XMODIFIERS=@im=fcitx \
+		SDL_IM_MODULE=fcitx \
+		"$@"
+}
+
+# fcitx5 is optional: Japanese input is nice to have but the session must
+# still start without it.
+if command -v fcitx5 >/dev/null 2>&1; then
+	session_env fcitx5 >/dev/null 2>&1 &
+	fcitx5_pid=$!
+else
+	fcitx5_pid=
+	echo "xmonad-wslg: fcitx5 not found on PATH; Japanese input disabled (try: sudo apt install fcitx5 fcitx5-mozc)" >&2
+fi
+
 custom_bin="$HOME/.xmonad/xmonad-$(uname -m)-linux"
 if [ -x "$custom_bin" ]; then
 	xmonad_bin="$custom_bin"
@@ -74,14 +108,4 @@ else
 	exit 1
 fi
 
-# Force X11 backends for the whole session: with WSLg's wayland socket
-# present, GTK/Qt/SDL apps would otherwise open on the host Wayland
-# compositor instead of the nested display (GDK even tries the default
-# "wayland-0" socket when WAYLAND_DISPLAY is unset).
-env -u WAYLAND_DISPLAY \
-	DISPLAY="$nested_display" \
-	GDK_BACKEND=x11 \
-	QT_QPA_PLATFORM=xcb \
-	SDL_VIDEODRIVER=x11 \
-	XDG_SESSION_TYPE=x11 \
-	"$xmonad_bin"
+session_env "$xmonad_bin"
