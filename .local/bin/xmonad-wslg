@@ -74,4 +74,14 @@ else
 	exit 1
 fi
 
-DISPLAY="$nested_display" "$xmonad_bin"
+# Force X11 backends for the whole session: with WSLg's wayland socket
+# present, GTK/Qt/SDL apps would otherwise open on the host Wayland
+# compositor instead of the nested display (GDK even tries the default
+# "wayland-0" socket when WAYLAND_DISPLAY is unset).
+env -u WAYLAND_DISPLAY \
+	DISPLAY="$nested_display" \
+	GDK_BACKEND=x11 \
+	QT_QPA_PLATFORM=xcb \
+	SDL_VIDEODRIVER=x11 \
+	XDG_SESSION_TYPE=x11 \
+	"$xmonad_bin"
