@@ -4,7 +4,7 @@
 # $<: the first file that the target depends on
 # $?: files newer than the target that the target depends on
 
-FILES:=.vimrc .gvimrc .gitconfig .config/git/ignore .config/ranger/rc.conf .xmobarrc .Xdefaults .tmux.conf .local/bin/xmonad-wslg
+FILES:=.vimrc .gvimrc .gitconfig .config/git/ignore .config/ranger/rc.conf .xmobarrc .Xdefaults .tmux.conf .local/bin/xmonad-wslg .config/lxterminal/lxterminal.conf
 DIRS:=.vim .xmonad
 
 .SILENT:
