@@ -8,6 +8,8 @@ okf_version: "0.1"
 * [xmonad-config の stack 移行（lts-14.16 から lts-22.44）](xmonad-config-stack-migration.md) - system-ghc で ghcup の GHC 9.6.7 を使い、snapshot に無い xmonad 0.18 系を extra-deps で固定した。build スクリプトは getXMonadDir 削除のため sh 化した。
 * [xmobar の WSL2 制約と設定の罠](xmobar-wsl2-constraints.md) - WSL2 では coretemp が無く MultiCoreTemp が動かない。additionalFonts が空のまま &lt;fn=1&gt; を使うと xmobar 0.36 は index too large でクラッシュする。
 
+* [ネスト X セッションでの日本語入力（fcitx5 + mozc）](japanese-input-fcitx5-wslg.md) - fcitx5 と mozc をネストした X セッションで使う手順。ロケールが C.UTF-8 だと mozc が自動登録されないため profile の初期設定が要る。トグルは既定の Ctrl+Space。
+
 # リポジトリ運用
 
 * [merge.ff=false 設定下では git merge --squash が失敗する](git-squash-merge-ff-config.md) - この dotfiles の .gitconfig は merge.ff=false を設定しており、--squash と衝突する。-c merge.ff=true で一時的に上書きして実行する。
